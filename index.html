@@ -5,7 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FSE Skill Matrix Exam Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+        // ✅ Your actual Supabase keys
+    const supabaseUrl = 'https://iassdtbzsktpmzeqeeql.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlhc3NkdGJ6c2t0cG16ZXFlZXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTA5MDEsImV4cCI6MjA2NjYyNjkwMX0.7XJfBrsgVc7fpPiCiQLmPBodLJZXv_3kC9QSNZALdic';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function addUser() {
+      const { data, error } = await supabase
+        .from('users')
+        .insert([
+          {
+            name: 'John Doe',
+            fsmid: 'FSE-001',
+            role: 'FSE',
+            state: 'Texas',
+            asm: 'Michael Brown',
+            status: 'Active',
+            email: 'john@example.com'
+          }
+        ]);
+
+      console.log('Added:', data, error);
+      alert('User added! Check console for details.');
+    }
+
+    async function fetchQuestions() {
+      const { data, error } = await supabase
+        .from('questions')
+        .select('*');
+
+      console.log('Questions:', data, error);
+      alert('Check console to see all questions fetched.');
+    }
+
+    async function saveResult() {
+      const { data, error } = await supabase
+        .from('results')
+        .insert([
+          {
+            fsmid: 'FSE-001',
+            session: 'June 2023 Certification',
+            score: 85,
+            pass_mark: 75,
+            result: 'Passed'
+          }
+        ]);
+
+      console.log('Result saved:', data, error);
+      alert('Result saved! Check console for details.');
+    }
+  </script>
     <style>
         /* Custom styles */
         .sidebar {
@@ -51,17 +101,7 @@
             transform-origin: 50% 50%;
         }
     </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const supabaseUrl = 'https://iassdtbzsktpmzeqeeql.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlhc3NkdGJ6c2t0cG16ZXFlZXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTA5MDEsImV4cCI6MjA2NjYyNjkwMX0.7XJfBrsgVc7fpPiCiQLmPBodLJZXv_3kC9QSNZALdic';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    async function fetchQuestions() {
-  const { data, error } = await supabase.from('questions').select('*');
-  console.log(data);
-}
 
-</script>
 
 </head>
 <body class="bg-gray-100 font-sans">
