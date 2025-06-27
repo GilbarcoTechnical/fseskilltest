@@ -56,6 +56,11 @@
   const supabaseUrl = 'https://iassdtbzsktpmzeqeeql.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlhc3NkdGJ6c2t0cG16ZXFlZXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwNTA5MDEsImV4cCI6MjA2NjYyNjkwMX0.7XJfBrsgVc7fpPiCiQLmPBodLJZXv_3kC9QSNZALdic';
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    async function fetchQuestions() {
+  const { data, error } = await supabase.from('questions').select('*');
+  console.log(data);
+}
+
 </script>
 
 </head>
